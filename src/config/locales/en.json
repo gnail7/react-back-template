@@ -3,5 +3,6 @@
   "login": "Login",
   "language": "English",
   "routerSys": "Router System",
-  "themeSys": "Theme System"
+  "themeSys": "Theme System",
+  "loginHint": "Please login first"
 }

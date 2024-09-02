@@ -22,9 +22,18 @@ const defaultRoutes = [
           importFunc={() => import('@/pages/Home')} 
           Fallback={<>loading....</>}
         />,
-      }
+      },
+     
     ]
   },
+  {
+    path: 'login',
+    name: 'login',
+    element: <LazyComponent 
+      importFunc={() => import('@/pages/Login/Login.jsx')} 
+      Fallback={<>loading....</>}
+    />,
+  }
 ]
 
 // dynamic route part always get by the API
@@ -79,12 +88,15 @@ export default function FilterRouter() {
       ];
 
       setRoutes([
+        redirectRoute,
+        ...defaultRoutes,
         {
           ...defaultRoutes[0],
-          children: [redirectRoute, ...combinedRoutes],
+          children: [ ...combinedRoutes],
         },
-      ]);
-    };
+      ])
+      
+    }
 
     initRoutes();
   }, [])

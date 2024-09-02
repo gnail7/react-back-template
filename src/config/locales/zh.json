@@ -3,5 +3,6 @@
   "login": "登录",
   "language": "中文",
   "routerSys": "路由系统",
-  "themeSys": "主题系统"
+  "themeSys": "主题系统",
+  "loginHint": "请先完成登录"
 }
