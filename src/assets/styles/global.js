@@ -1,11 +1,15 @@
 import { createGlobalStyle } from 'antd-style'
-
 const Global = createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
+    
+  li {
+    list-style: none;
+  }
+  //  ====== 容器部分 ======
   .page{
     background: ${(p) => p.theme.colorBgContainer};
     width: 100%;
@@ -16,7 +20,7 @@ const Global = createGlobalStyle`
     display: flex;
   }
 
-  .flexCenterBox{
+  .felex-center{
     display: flex;
     jusityfyContent: center;
     alignItems: center
@@ -33,12 +37,14 @@ const Global = createGlobalStyle`
       background: lightgreen; // 在中等屏幕上使用不同的背景色
     }
   }
+
   .container {
     width: 100%;
     height: 100%;
     boxSizing: border-box;
     background: ${p => p.theme.colorBgContainer};
   }
+
   .ant-custom-button {
     color: ${(p) => p.theme.colorPrimary};
     background: ${(p) => p.theme.colorPrimaryBg};
@@ -63,9 +69,25 @@ const Global = createGlobalStyle`
   .cursor-pointer {
     cursor: pointer;
   }
+    
   .pd {
     padding: ${(p) => p.theme.padding}px
   }
+  
+  .hover-placeholder {
+    height: 40px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease; /* 平滑过渡效果 */
+    border-radius: ${(p) => p.theme.borderRadius}px;
+  }
+
+  .hover-placeholder:hover {
+    background-color: ${(p) => p.theme.colorBgTextHover}; /* 悬停时的背景颜色 */
+  }
+
 `
 
 

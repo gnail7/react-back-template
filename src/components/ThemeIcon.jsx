@@ -7,13 +7,13 @@ import { SunOutlined, MoonOutlined } from '@ant-design/icons'
  */
 export default function ThemeIcon({theme, lightIcon = SunOutlined, darkIcon = MoonOutlined, setTheme}) {
   const RenderIcon = theme === 'light' ? lightIcon : darkIcon
-  const a = 1
   const changeTheme = () => {
-    console.log('change theme', theme)
     setTheme()
   }
 
   return (
-    <RenderIcon className='cursor-pointer' onClick={changeTheme}/>
+    <div className='hover-placeholder'>
+      <RenderIcon className='cursor-pointer' onClick={changeTheme}/>
+    </div>
   )
 }

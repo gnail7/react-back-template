@@ -9,8 +9,7 @@ const userSlice = createSlice({
     email: null,
     address: null,
     themeMode: 'auto',
-    hasLogin: false,
-    token: ''
+    hasLogin: false
   },
 
   reducers: {
@@ -35,7 +34,6 @@ const userSlice = createSlice({
     },
 
     toggleThemeMode(state) {
-      console.log('toggleThemeMode', state.themeMode);
       state.themeMode = state.themeMode === 'dark' ? 'light' : 'dark';
     },
 

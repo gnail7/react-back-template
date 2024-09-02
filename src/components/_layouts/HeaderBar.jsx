@@ -4,6 +4,8 @@ import { createStyles } from 'antd-style'
 import ThemeIcon from '../ThemeIcon'
 import { useDispatch } from 'react-redux'
 import {toggleThemeMode} from '@/store/feature/user'
+import { Space } from 'antd'
+import LanIcon from '../LanIcon'
 
 const style = createStyles((token) => ({
   logo: {
@@ -20,11 +22,12 @@ export default function HeaderBar({theme}) {
   const dispatch = useDispatch()
 
   return (
-    <Flex className={['container']} align='center' justify="space-between" >
+    <Flex className={['container', 'pd'].join(' ')} align='center' justify="space-between" >
       <Flex align='center' justify='center' className={style.header} style={{width: '190px'}}>LOGO</Flex>
-      <Flex className='pd'>
+      <Space size={20} style={{ height: 'auto' }}>
+        <LanIcon />
         <ThemeIcon theme={theme} setTheme={() => dispatch(toggleThemeMode())}></ThemeIcon>
-      </Flex>
+      </Space>
     </Flex>
   )
 }

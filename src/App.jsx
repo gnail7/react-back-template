@@ -5,7 +5,7 @@ import { useTheme } from 'antd-style';
 import SiderBar from './components/_layouts/SiderBar'
 import HeaderBar from './components/_layouts/HeaderBar'
 import BreadCrumbWrapper from './components/_layouts/BreadCrumbWrapper';
-const { Header, Footer, Sider, Content } = Layout
+const { Header, Sider, Content } = Layout
 
 function App() {
   const theme = useTheme()

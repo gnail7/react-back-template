@@ -41,7 +41,7 @@ const dynamicRoutes = [
   {
     path: "/about",
     name: 'about',
-    filePath: '../pages/Dashboard/index.jsx'
+    filePath: '../pages/Dashboard/index.jsx',
   }
 ]
 

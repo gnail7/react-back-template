@@ -5,7 +5,7 @@ const darkTheme = () => {
       colorBgContainer: '#282c34',
       colorBgElevated: '#32363e',
     },
-  };
+  }
 }
 const lightTheme = () => {
   return {
@@ -14,8 +14,7 @@ const lightTheme = () => {
       colorBgContainer: 'pink',
       colorBgElevated: '#32363e',
     },
-    
-  };
+  }
 }
 
 export default function getThemeByAppearance(appearance) {
