@@ -68,7 +68,9 @@ export default [
 
         /** 追加一些其他自定义全局规则 */
         wx: true,
+        ecmaFeatures: { jsx: true }
       },
+      
     },
   },
 ]
