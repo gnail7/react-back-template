@@ -1,9 +1,9 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
 
-import en from './locales/en.json';
-import zh from './locales/zh.json';
+import en from './locales/en.json'
+import zh from './locales/zh.json'
 
 const international = i18n
   .use(LanguageDetector)
@@ -21,5 +21,5 @@ const international = i18n
       // 检查检测配置是否正确
       // 例如，检测器设置可能会影响代码
     },
-  });
-export default international;
+  })
+export default international

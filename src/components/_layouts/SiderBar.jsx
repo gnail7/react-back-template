@@ -1,29 +1,28 @@
-import { useState, useEffect } from 'react';
-import { Menu } from 'antd';
-import React from 'react'
+import { useState, useEffect } from 'react'
+import { Menu } from 'antd'
 import { menuList } from './mock/menu'
 import { MenuIcon } from './config.js'
 
-const traverseMenuList =  (menuList) => {
-  const updatedMenuList = menuList.map(element => {
-    const key = 'menu-' + element.key;
-    const IconComponent  = MenuIcon[element.icon]
+const traverseMenuList = (menuList) => {
+  const updatedMenuList = menuList.map((element) => {
+    const key = 'menu-' + element.key
+    const IconComponent = MenuIcon[element.icon]
     return {
       ...element,
       key,
       label: element.label,
-      icon: IconComponent ? <IconComponent /> : null ,
-      children: element.children ?  traverseMenuList(element.children) : null
-    };
+      icon: IconComponent ? <IconComponent /> : null,
+      children: element.children ? traverseMenuList(element.children) : null,
+    }
   })
-  return updatedMenuList;
-};
+  return updatedMenuList
+}
 
 const SiderBar = () => {
-  const [menuItems, setMenuItems] = useState([]);
+  const [menuItems, setMenuItems] = useState([])
 
   useEffect(() => {
-    const fetchMenuItems =  () => {
+    const fetchMenuItems = () => {
       const updatedMenuList = traverseMenuList(menuList)
       setMenuItems(updatedMenuList)
     }
@@ -42,4 +41,4 @@ const SiderBar = () => {
   )
 }
 
-export default SiderBar;
+export default SiderBar

@@ -4,5 +4,9 @@
   "language": "English",
   "routerSys": "Router System",
   "themeSys": "Theme System",
-  "loginHint": "Please login first"
+  "loginHint": "Please login first",
+  "hello": "hello",
+  "loginStatus": "status",
+  "setting": "personal setting",
+  "user": "user"
 }

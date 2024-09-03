@@ -4,8 +4,8 @@ import global from './feature/global'
 const store = configureStore({
   reducer: {
     user,
-    global
-  }
+    global,
+  },
 })
 
 export default store

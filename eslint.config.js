@@ -21,13 +21,21 @@ export default [
     semi: false,
     jsx: true,
     braceStyle: '1tbs',
-    arrowParens: 'always',
+    arrowParens: 'false',
   }),
   /**
    * javascript 规则
    */
   {
     files: ['**/*.{js,mjs,cjs,jsx}'],
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
     plugins: {
       react,
       'react-hooks': reactHooks,
@@ -37,15 +45,7 @@ export default [
       'no-undef': 'error',
       'semi': 'off',
       'no-console': 'warn',
-      'no-unused-vars': [
-        'warn',
-        {
-          //  仅检查是否使用了本地声明的变量，但允许未使用全局变量。
-          vars: 'local',
-          //  将不检查最后使用的参数之前出现的未使用的位置参数，但将检查最后使用的参数之后的所有命名参数和所有位置参数
-          args: 'after-used',
-        },
-      ],
+      'no-unused-vars': 'warn',
       ...eslint.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
@@ -55,6 +55,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/prop-types': 'off',
     },
   },
 
@@ -62,15 +63,22 @@ export default [
    * 全局配置
    */
   {
+    files: ['**/*.{js,jsx}'],
     languageOptions: {
+      ecmaVersion: 2020,
       globals: {
         ...globals.browser,
 
         /** 追加一些其他自定义全局规则 */
         wx: true,
-        ecmaFeatures: { jsx: true }
       },
-      
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
     },
+    settings: { react: { version: '18.3' } },
+
   },
 ]

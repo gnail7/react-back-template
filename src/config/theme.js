@@ -18,9 +18,10 @@ const lightTheme = () => {
 }
 
 export default function getThemeByAppearance(appearance) {
+  console.log('appearance', appearance)
   if (appearance === 'dark') {
-    return darkTheme;
+    return darkTheme
   } else {
-    return lightTheme;
+    return lightTheme
   }
 }

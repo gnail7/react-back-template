@@ -1,4 +1,3 @@
-import React from 'react'
 import { Breadcrumb } from 'antd'
 export default function BreadCrumbWrapper() {
   return (
@@ -17,6 +16,6 @@ export default function BreadCrumbWrapper() {
           title: 'An Application',
         },
       ]}
-    ></Breadcrumb>
+    />
   )
 }

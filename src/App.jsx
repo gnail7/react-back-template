@@ -1,10 +1,10 @@
-import './App.css';
-import { Layout,  } from 'antd';
-import {  Outlet } from 'react-router-dom';
-import { useTheme } from 'antd-style';
+import './App.css'
+import { Layout } from 'antd'
+import { Outlet } from 'react-router-dom'
+import { useTheme } from 'antd-style'
 import SiderBar from './components/_layouts/SiderBar'
 import HeaderBar from './components/_layouts/HeaderBar'
-import BreadCrumbWrapper from './components/_layouts/BreadCrumbWrapper';
+import BreadCrumbWrapper from './components/_layouts/BreadCrumbWrapper'
 const { Header, Sider, Content } = Layout
 
 function App() {
@@ -30,28 +30,26 @@ function App() {
   }
   const contentStyle = {
     textAlign: 'center',
-    height: '100%'
+    height: '100%',
   }
-
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>
-        <HeaderBar theme={theme.appearance}/>
+        <HeaderBar />
       </Header>
- 
       <Layout>
         <Sider style={siderStyle}>
-          <SiderBar/>
+          <SiderBar />
         </Sider>
-        <Content style={contentStyle}>    
-          <div className='container'>
-            <BreadCrumbWrapper/>          
-            <Outlet/>          
+        <Content style={contentStyle}>
+          <div className="container">
+            <BreadCrumbWrapper />
+            <Outlet />
           </div>
         </Content>
       </Layout>
     </Layout>
-  );
+  )
 }
 
-export default App;
+export default App

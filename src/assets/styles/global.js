@@ -12,8 +12,8 @@ const Global = createGlobalStyle`
   //  ====== 容器部分 ======
   .page{
     background: ${(p) => p.theme.colorBgContainer};
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
   }
 
   .flexBox {
@@ -42,7 +42,7 @@ const Global = createGlobalStyle`
     width: 100%;
     height: 100%;
     boxSizing: border-box;
-    background: ${p => p.theme.colorBgContainer};
+    background: ${(p) => p.theme.colorBgContainer};
   }
 
   .ant-custom-button {
@@ -89,7 +89,5 @@ const Global = createGlobalStyle`
   }
 
 `
-
-
 
 export default Global
