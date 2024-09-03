@@ -8,5 +8,20 @@
   "hello": "hello",
   "loginStatus": "status",
   "setting": "personal setting",
-  "user": "user"
+  "user": "user",
+  "logout": "logout",
+  "home": "首页",
+  "about": "关于我们",
+  "contact": "联系我们",
+  "search": "搜索",
+  "searchHint": "请输入搜索内容",
+  "searchResult": "搜索结果",
+  "noResult": "没有找到相关内容",
+  "noMore": "没有更多内容了",
+  "loadMore": "加载更多",
+  "loading": "加载中...",
+  "error": "出错了",
+  "retry": "重试",
+  "confirm": "确定",
+  "cancel": "取消"
 }

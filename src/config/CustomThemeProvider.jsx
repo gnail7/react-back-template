@@ -13,7 +13,6 @@ const CustomThemeProvider = ({ children }) => {
   useEffect(() => {
     const localThemeMode = localStorage.getItem('themeMode') ? localStorage.getItem('themeMode') : 'auto'
     dispatch(setThemeMode(localThemeMode))
-    console.log('localThemeMode', localThemeMode, themeMode)
 
     theme.appearance = localThemeMode
   }, [themeMode])

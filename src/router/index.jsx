@@ -3,6 +3,8 @@ import LazyComponent from './LazyComponent'
 import { useState, useEffect } from 'react'
 import { useRoutes } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setMenuList } from '../store/feature/global'
 
 const redirectRoute = {
   path: '/',
@@ -44,11 +46,23 @@ const dynamicRoutes = [
     path: '/about',
     name: 'about',
     filePath: '../pages/Dashboard/index.jsx',
+    icon: 'AreaChartOutlined',
+    key: '1',
+    children: [
+      {
+        path: '/about',
+        name: 'about',
+        filePath: '../pages/Dashboard/index.jsx',
+        icon: 'AreaChartOutlined',
+        key: '/about',
+      },
+    ],
   },
 ]
 
 export default function FilterRouter() {
   const [routes, setRoutes] = useState([])
+  const dispatch = useDispatch()
 
   const loadRouteElement = async (route) => {
     return {
@@ -83,6 +97,7 @@ export default function FilterRouter() {
   useEffect(() => {
     const initRoutes = async () => {
       const loadedDynamicRoutes = await traverseAndLoadRoutes(dynamicRoutes)
+      dispatch(setMenuList(dynamicRoutes))
       const combinedRoutes = [
         ...defaultRoutes[0].children,
         ...loadedDynamicRoutes,

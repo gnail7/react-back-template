@@ -1,6 +1,6 @@
-import useLoginInterceptor from '@/hooks/useLoginInterceptor'
+// import useLoginInterceptor from '@/hooks/useLoginInterceptor'
 export default function Dashboard() {
-  useLoginInterceptor()
+  // useLoginInterceptor()
   return (
     <div>Dashboard</div>
   )

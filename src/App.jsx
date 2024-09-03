@@ -5,10 +5,12 @@ import { useTheme } from 'antd-style'
 import SiderBar from './components/_layouts/SiderBar'
 import HeaderBar from './components/_layouts/HeaderBar'
 import BreadCrumbWrapper from './components/_layouts/BreadCrumbWrapper'
+
 const { Header, Sider, Content } = Layout
 
 function App() {
   const theme = useTheme()
+
   const layoutStyle = {
     borderRadius: 8,
     overflow: 'hidden',
@@ -38,11 +40,15 @@ function App() {
         <HeaderBar />
       </Header>
       <Layout>
-        <Sider style={siderStyle}>
+        <Sider
+          style={siderStyle}
+          breakpoint="lg"
+          collapsedWidth="0"
+        >
           <SiderBar />
         </Sider>
         <Content style={contentStyle}>
-          <div className="container">
+          <div className="container pd">
             <BreadCrumbWrapper />
             <Outlet />
           </div>

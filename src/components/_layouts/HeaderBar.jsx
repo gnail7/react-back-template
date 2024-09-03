@@ -20,6 +20,10 @@ const getUserDropdown = (t, userInfo) => {
       label: t('setting'),
       key: 'setting1',
     },
+    {
+      label: t('logout'),
+      key: 'logout',
+    },
   ]
 }
 
@@ -50,12 +54,7 @@ const UserAvatar = () => {
       }}
       trigger={['click']}
     >
-      <a onClick={(e) => e.preventDefault()}>
-        <Space>
-          Click me
-          <UserOutlined />
-        </Space>
-      </a>
+      <UserOutlined />
     </Dropdown>
   )
 }
