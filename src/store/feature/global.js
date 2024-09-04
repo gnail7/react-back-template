@@ -6,6 +6,7 @@ export const globalSlice = createSlice({
     lang: 'zh',
     menuList: [],
     breadCrumbList: [],
+    btnPermissions: [],
   },
 
   reducers: {
@@ -18,8 +19,11 @@ export const globalSlice = createSlice({
     setBreadCrumbList: (state, action) => {
       state.breadCrumbList = action.payload
     },
+    setBtnPermissions: (state, action) => {
+      state.btnPermissions = action.payload
+    },
   },
 })
 
-export const { setLang, setMenuList, setBreadCrumbList } = globalSlice.actions
+export const { setLang, setMenuList, setBreadCrumbList, setBtnPermissions } = globalSlice.actions
 export default globalSlice.reducer

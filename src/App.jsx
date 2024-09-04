@@ -34,6 +34,7 @@ function App() {
     textAlign: 'center',
     height: '100%',
   }
+
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>

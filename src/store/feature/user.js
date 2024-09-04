@@ -4,28 +4,29 @@ const userSlice = createSlice({
   name: 'user',
 
   initialState: {
-    id: null,
+    userId: null,
     name: 'GNAIL',
     email: null,
-    address: null,
+    phone: '',
     themeMode: 'dark',
     hasLogin: false,
   },
 
   reducers: {
     setUser(state, action) {
-      const { id, name, email, address } = action.payload
-      state.id = id
+      const { userId, name, email, phone } = action.payload
+      state.userId = userId
       state.name = name
+      state.phone = phone
       state.email = email
-      state.address = address
+      state.hasLogin = true
     },
 
     resetUser(state) {
-      state.id = null
+      state.userId = null
       state.name = null
       state.email = null
-      state.address = null
+      state.hasLogin = false
     },
 
     setThemeMode(state, action) {

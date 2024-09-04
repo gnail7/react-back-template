@@ -1,17 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { MenuIcon } from './config.js'
 import { useNavigate } from 'react-router-dom'
 import { setBreadCrumbList } from '../../store/feature/global.js'
 import { Menu } from 'antd'
+import { isEmpty } from 'lodash-es'
 
 const traverseMenuList = (menuList) => {
   const updatedMenuList = menuList.map((element) => {
-    const key = element.key
-    const IconComponent = MenuIcon[element.icon]
+    const key = isEmpty(element.resourceUrl) ? `${element.resourceName}-${element.resourceId}` : element.resourceUrl
+    const IconComponent = MenuIcon[element.resourceIcon]
     return {
       key,
-      label: element.name,
+      label: element.resourceName,
       icon: IconComponent ? <IconComponent /> : null,
       children: element.children ? traverseMenuList(element.children) : null,
     }
@@ -40,14 +41,15 @@ const SiderBar = () => {
   const { menuList } = useSelector((state) => state.global)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  useEffect(() => {
-    const fetchMenuItems = () => {
-      const updatedMenuList = traverseMenuList(menuList)
-      setMenuItems(updatedMenuList)
-    }
 
+  const fetchMenuItems = useCallback(() => {
+    const updatedMenuList = traverseMenuList(menuList)
+    setMenuItems(updatedMenuList)
+  }, [menuList.length])
+
+  useEffect(() => {
     fetchMenuItems()
-  }, [])
+  }, [menuList.length])
 
   const handleMenuClick = (e) => {
     const breadCrumbList = findBreadCrumbList(menuList, e.keyPath)

@@ -42,10 +42,9 @@ export default [
       'react-refresh': reactRefresh,
     },
     rules: {
-      'no-undef': 'error',
+      'no-undef': 'warn',
       'semi': 'off',
       'no-console': 'warn',
-      'no-unused-vars': 'warn',
       ...eslint.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
@@ -56,6 +55,8 @@ export default [
         { allowConstantExport: true },
       ],
       'react/prop-types': 'off',
+      'no-unused-vars': 'warn',
+      'no-duplicate-imports': 'error',
     },
   },
 

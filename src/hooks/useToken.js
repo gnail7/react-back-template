@@ -1,7 +1,11 @@
 export const useToken = () => {
   const getToken = () => {
-    const token = localStorage.getItem('token')
-    return token ? JSON.parse(token) : null
+    try {
+      const token = localStorage.getItem('token')
+      return token ? JSON.parse(token) : null
+    } catch (error) {
+      return error
+    }
   }
 
   const setToken = (token) => {

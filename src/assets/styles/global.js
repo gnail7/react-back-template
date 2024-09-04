@@ -88,6 +88,17 @@ const Global = createGlobalStyle`
     background-color: ${(p) => p.theme.colorBgTextHover}; /* 悬停时的背景颜色 */
   }
 
+  // ====== 大小部分 ======
+  .w100-h100 {
+    width: 100%;
+    height: 100%;
+  }
+
+  // ====== 色彩部分 ======
+  .box-shadow {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  }
+
 `
 
 export default Global

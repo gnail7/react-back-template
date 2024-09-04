@@ -1,27 +1,39 @@
 // 登录拦截
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { getUserInfoFromToken } from '@/api/userServer'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { message } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useToken } from './useToken'
-export default function useLoginInterceptor() {
+import { setMenuList, setBtnPermissions } from '@/store/feature/global'
+import { setUser } from '@/store/feature/user'
+
+export function useLoginInterceptor() {
   const location = useLocation()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const userInfo = useSelector((state) => state.user)
   const { t } = useTranslation()
   const { getToken, removeToken } = useToken()
-
   useEffect(() => {
     if (userInfo.hasLogin) {
-      if (location.pathname !== '/login') {
+      if (location.pathname == '/login') {
         navigate('/home', { state: { from: location.pathname } })
       }
     } else {
       if (getToken()) {
-        removeToken()
-        message.info('token已过期，请重新登录')
+        getUserInfoFromToken().then((res) => {
+          const { menus, user, buttons } = res.data
+          dispatch(setMenuList(menus))
+          dispatch(setUser(user))
+          dispatch(setBtnPermissions(buttons))
+          location.pathname === '/login' && navigate('/home', { state: { from: location.pathname } })
+        }).catch(() => {
+          removeToken()
+          message.info('登录凭证已过期，请重新登录')
+          navigate('/login', { state: { from: location.pathname }, replace: true })
+        })
       } else {
         if (location.pathname !== '/login') {
           message.info(t('loginHint'))
@@ -29,5 +41,5 @@ export default function useLoginInterceptor() {
         }
       }
     }
-  }, [])
+  }, [location.pathname])
 }

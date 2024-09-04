@@ -1,10 +1,13 @@
 import App from '../App'
 import LazyComponent from './LazyComponent'
 import { useState, useEffect } from 'react'
-import { useRoutes } from 'react-router-dom'
-import { Navigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { setMenuList } from '../store/feature/global'
+import { useLoginInterceptor } from '@/hooks/useLoginInterceptor'
+import { useRoutes, Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Spin } from 'antd'
+import { cloneDeep } from 'lodash-es'
+
+const modules = import.meta.glob('/src/pages/**/*.jsx')
 
 const redirectRoute = {
   path: '/',
@@ -22,7 +25,7 @@ const defaultRoutes = [
         element: (
           <LazyComponent
             importFunc={() => import('@/pages/Home')}
-            Fallback={<>loading....</>}
+            Fallback={<Spin />}
           />
         ),
       },
@@ -34,86 +37,64 @@ const defaultRoutes = [
     element: (
       <LazyComponent
         importFunc={() => import('@/pages/Login/Login.jsx')}
-        Fallback={<>loading....</>}
+        Fallback={<Spin />}
       />
     ),
   },
 ]
-
-// dynamic route part always get by the API
-const dynamicRoutes = [
-  {
-    path: '/about',
-    name: 'about',
-    filePath: '../pages/Dashboard/index.jsx',
-    icon: 'AreaChartOutlined',
-    key: '1',
-    children: [
-      {
-        path: '/about',
-        name: 'about',
-        filePath: '../pages/Dashboard/index.jsx',
-        icon: 'AreaChartOutlined',
-        key: '/about',
-      },
-    ],
-  },
-]
-
 export default function FilterRouter() {
   const [routes, setRoutes] = useState([])
-  const dispatch = useDispatch()
+  const { menuList } = useSelector((state) => state.global)
+  const dynamicRoutes = cloneDeep(menuList)
+  useLoginInterceptor()
 
-  const loadRouteElement = async (route) => {
+  const loadRouteElement = (route) => {
+    const importFunc = () => modules[`/src/pages/Dashboard${route.resourceUrl}.jsx`]()
     return {
       ...route,
+      key: route.resourceId,
+      label: route.resourceName,
+      path: route.resourceUrl,
       element: (
         <LazyComponent
-          importFunc={() => import(`${route.filePath}`)}
-          Fallback={<>loading....</>}
+          importFunc={importFunc}
+          Fallback={<div>Loading...</div>}
         />
       ),
     }
   }
 
-  const traverseAndLoadRoutes = async (routes) => {
-    const loadedRoutes = await Promise.all(
-      routes.map(async (route) => {
-        if (route.filePath) {
-          route = await loadRouteElement(route)
-        }
+  const traverseAndLoadRoutes = (routes) => {
+    const loadedRoutes = routes.map((route) => {
+      if (route.resourceUrl) {
+        route = loadRouteElement(route)
+      }
 
-        if (route.children) {
-          route.children = await traverseAndLoadRoutes(route.children)
-        }
+      if (route.children) {
+        route.children = traverseAndLoadRoutes(route.children)
+      }
 
-        return route
-      }),
-    )
+      return route
+    })
 
     return loadedRoutes
   }
 
   useEffect(() => {
     const initRoutes = async () => {
-      const loadedDynamicRoutes = await traverseAndLoadRoutes(dynamicRoutes)
-      dispatch(setMenuList(dynamicRoutes))
+      const loadedDynamicRoutes = traverseAndLoadRoutes(dynamicRoutes)
       const combinedRoutes = [
         ...defaultRoutes[0].children,
         ...loadedDynamicRoutes,
       ]
-
+      defaultRoutes[0].children = combinedRoutes
       setRoutes([
         redirectRoute,
         ...defaultRoutes,
-        {
-          ...defaultRoutes[0],
-          children: [...combinedRoutes],
-        },
       ])
     }
     initRoutes()
-  }, [])
+  }, [dynamicRoutes.length])
 
   return <>{useRoutes(routes)}</>
 }
