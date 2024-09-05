@@ -32,5 +32,7 @@
   "password": "Password",
   "loginError": "username or password error",
   "loginSuccess": "login success",
-  "logoutSuccess": "logout success"
+  "logoutSuccess": "logout success",
+  "menuPermisson": "Menu permission",
+  "buttonPermisson": "Button permission"
 }

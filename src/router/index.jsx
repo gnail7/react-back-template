@@ -6,6 +6,7 @@ import { useRoutes, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Spin } from 'antd'
 import { cloneDeep } from 'lodash-es'
+import { ROUTE_MAP } from './config/routeMap'
 
 const modules = import.meta.glob('/src/pages/**/*.jsx')
 
@@ -49,7 +50,8 @@ export default function FilterRouter() {
   useLoginInterceptor()
 
   const loadRouteElement = (route) => {
-    const importFunc = () => modules[`/src/pages/Dashboard${route.resourceUrl}.jsx`]()
+    const routePath = ROUTE_MAP.get(route.resourceUrl)
+    const importFunc = () => modules[`/src/pages/${routePath}.jsx`]()
     return {
       ...route,
       key: route.resourceId,

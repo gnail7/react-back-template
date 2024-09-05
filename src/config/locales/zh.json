@@ -32,5 +32,7 @@
   "password": "密码",
   "loginError": "用户名或密码错误",
   "loginSuccess": "登录成功",
-  "logoutSuccess": "退出登录成功"
+  "logoutSuccess": "退出登录成功",
+  "menuPermissions": "菜单权限",
+  "pagePermissions": "页面权限"
 }
