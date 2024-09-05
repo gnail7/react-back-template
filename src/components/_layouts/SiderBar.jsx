@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { MenuIcon } from './config.js'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { setBreadCrumbList } from '../../store/feature/global.js'
 import { Menu } from 'antd'
 import { isEmpty } from 'lodash-es'
@@ -20,20 +20,27 @@ const traverseMenuList = (menuList) => {
   return updatedMenuList
 }
 
+// 根据key值找到在menuList中的路径
 const findBreadCrumbList = (menuList, keyPath) => {
-  const acc = []
-  menuList.forEach((element) => {
-    if (keyPath.includes(element.key)) {
-      acc.push({
-        key: element.key,
-        title: element.name,
-      })
+  function findRecursive(menuList, keyPath) {
+    for (let i = 0; i < menuList.length; i++) {
+      const element = menuList[i]
+      const newPath = [element]// 更新路径
+
+      if (element.resourceUrl === keyPath) {
+        return newPath // 找到目标路径
+      }
+
+      if (element.children) {
+        const result = findRecursive(element.children, keyPath, newPath)
+        if (result) {
+          return [...newPath, ...result] // 确保路径从根到目标的顺序
+        }
+      }
     }
-    if (element.children) {
-      acc.push(...findBreadCrumbList(element.children, keyPath))
-    }
-  })
-  return acc
+    return null
+  }
+  return findRecursive(menuList, keyPath)
 }
 
 const SiderBar = () => {
@@ -41,6 +48,7 @@ const SiderBar = () => {
   const { menuList } = useSelector((state) => state.global)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const fetchMenuItems = useCallback(() => {
     const updatedMenuList = traverseMenuList(menuList)
@@ -51,9 +59,12 @@ const SiderBar = () => {
     fetchMenuItems()
   }, [menuList.length])
 
-  const handleMenuClick = (e) => {
-    const breadCrumbList = findBreadCrumbList(menuList, e.keyPath)
+  useEffect(() => {
+    const breadCrumbList = findBreadCrumbList(menuList, location.pathname)
     dispatch(setBreadCrumbList(breadCrumbList))
+  }, [location.pathname])
+
+  const handleMenuClick = (e) => {
     navigate(e.key)
   }
   return (

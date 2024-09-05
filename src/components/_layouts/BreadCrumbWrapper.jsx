@@ -2,11 +2,16 @@ import { Breadcrumb } from 'antd'
 import { useSelector } from 'react-redux'
 
 export default function BreadCrumbWrapper() {
-  const { breadCrumbList } = useSelector((state) => state.global)
+  const { breadCrumbList = [] } = useSelector((state) => state.global)
 
   return (
     <Breadcrumb
-      items={breadCrumbList}
+      items={breadCrumbList?.map((item) => {
+        return {
+          key: item.resourceUrl,
+          title: item.resourceName,
+        }
+      })}
     />
   )
 }
