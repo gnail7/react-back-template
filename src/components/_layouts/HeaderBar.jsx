@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Flex, Dropdown, Space } from 'antd'
 import { createStyles } from 'antd-style'
 import { useDispatch, useSelector } from 'react-redux'
@@ -41,7 +40,7 @@ const style = createStyles((token) => ({
 const UserAvatar = () => {
   const user = useSelector((state) => state.user)
   const { t, i18n } = useTranslation()
-  const [menuItems, setMenuItems] = React.useState([])
+  const [menuItems, setMenuItems] = useState([])
   useEffect(() => {
     const res = getUserDropdown(t, user)
     setMenuItems(res)
@@ -62,9 +61,10 @@ const UserAvatar = () => {
 export default function HeaderBar() {
   const theme = useSelector((state) => state.user.themeMode)
   const dispatch = useDispatch()
+
   return (
     <Flex className={['container', 'pd'].join(' ')} align="center" justify="space-between">
-      <Flex align="center" justify="center" className={style.header} style={{ width: '190px' }}>LOGO</Flex>
+      <Flex align="center" justify="center" className={style.header} style={{ width: '190px' }}> </Flex>
       <Space size={20} style={{ height: 'auto' }}>
         <LanIcon />
         <ThemeIcon theme={theme} setTheme={() => dispatch(toggleThemeMode())}></ThemeIcon>

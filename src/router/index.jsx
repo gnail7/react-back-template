@@ -12,7 +12,7 @@ const modules = import.meta.glob('/src/pages/**/*.jsx')
 
 const redirectRoute = {
   path: '/',
-  element: <Navigate to="/home" />,
+  element: <Navigate to="/dashboard" />,
 }
 
 const defaultRoutes = [
@@ -20,16 +20,6 @@ const defaultRoutes = [
     path: '/',
     element: <App />,
     children: [
-      {
-        path: '/home',
-        name: 'home',
-        element: (
-          <LazyComponent
-            importFunc={() => import('@/pages/Home')}
-            Fallback={<Spin />}
-          />
-        ),
-      },
     ],
   },
   {
@@ -38,6 +28,16 @@ const defaultRoutes = [
     element: (
       <LazyComponent
         importFunc={() => import('@/pages/Login/Login.jsx')}
+        Fallback={<Spin />}
+      />
+    ),
+  },
+  {
+    path: '/home',
+    name: 'home',
+    element: (
+      <LazyComponent
+        importFunc={() => import('@/pages/Home')}
         Fallback={<Spin />}
       />
     ),

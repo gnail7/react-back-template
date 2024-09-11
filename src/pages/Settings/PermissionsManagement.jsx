@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function PermissionsManagement() {
   return (
-    <div>permissionsManagement</div>
+    <div className="flex-1">permissionsManagement</div>
   )
 }

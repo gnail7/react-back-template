@@ -5,7 +5,11 @@ const Global = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-    
+
+  body{
+    overflow: hidden;
+  }
+
   li {
     list-style: none;
   }
@@ -24,6 +28,38 @@ const Global = createGlobalStyle`
     display: flex;
     jusityfyContent: center;
     alignItems: center
+  }
+  .flex-1 {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+  }
+  .flex {
+    display: flex;
+    &-sb {
+      display: flex;
+      justify-content: space-between;
+      &--center {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    &-sa {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+  
+  .flex-space-between {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flex-align-center {
+    display: flex;
+    align-items: center;
   }
 
   .test {
@@ -69,9 +105,15 @@ const Global = createGlobalStyle`
   .cursor-pointer {
     cursor: pointer;
   }
-    
+  // ====== 边距部分 ======
   .pd {
     padding: ${(p) => p.theme.padding}px
+  }
+  .mg {
+    madgin: ${(p) => p.theme.margin}px 
+  }
+  .mt {
+    margin-top: ${(p) => p.theme.margin}px
   }
   
   .hover-placeholder {
@@ -93,12 +135,47 @@ const Global = createGlobalStyle`
     width: 100%;
     height: 100%;
   }
-
+  .w100 {
+    width: 100%;
+  }
+  .h100 {
+    height: 100%;
+  }
   // ====== 色彩部分 ======
   .box-shadow {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   }
 
+  // ====== 媒体查询部分 ======
+  .search-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      &_right {
+        margin-top: 10px;
+      }
+    };
+  }
+  @media (max-width: 768px) {
+    .media-box {
+      display: flex;
+      flex-direction: column;
+      background: pink;
+    } 
+  };
+  @media (min-width: 769px) and (max-width: 1024px){
+     .media-box {
+      display: flex;
+      flex-direction: column;
+      background: pink;
+    } 
+  }
 `
 
 export default Global

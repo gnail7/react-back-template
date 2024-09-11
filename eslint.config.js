@@ -57,6 +57,24 @@ export default [
       'react/prop-types': 'off',
       'no-unused-vars': 'warn',
       'no-duplicate-imports': 'error',
+      'default-param-last': 'warn',
+      // 强制回调嵌套不超过三层
+      'max-nested-callbacks': ['warn', { max: 3 }],
+      // 强制嵌套不超过四层
+      'max-depth': 'warn',
+      // 禁止使用console
+      // 禁止在代码块里面声明与外面变量名相同的变量
+      'no-shadow': 'off',
+      // 不允许将导入、导出和解构的分配重命名为相同的名称
+      'no-useless-rename': 'error',
+      // 需要 let 或 const 而不是 var
+      'no-var': 'warn',
+      // 要求在文件末尾换行
+      'eol-last': ['error', 'always'],
+      // 要求尽可能使用单引号
+      // 要求在立即执行函数周围加上括号
+      'wrap-iife': ['warn', 'inside', { functionPrototypeMethods: true }],
+      // 控制语句强制大括号
     },
   },
 

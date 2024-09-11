@@ -1,8 +1,5 @@
-import { DatePicker } from 'antd'
-export default function home() {
+export default function Home() {
   return (
-    <div>
-      <DatePicker />
-    </div>
+    <div>Home</div>
   )
 }
