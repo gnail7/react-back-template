@@ -10,7 +10,7 @@ const { Header, Sider, Content } = Layout
 
 function App() {
   const theme = useTheme()
-
+  console.log(1)
   const layoutStyle = {
     borderRadius: 8,
     overflow: 'hidden',
